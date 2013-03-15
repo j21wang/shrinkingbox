@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .box{
+                height:100px;
+                width:100px;
+                position:absolute;
+                border: #888 1px dotted;
+            }
+
+            #box{
+                border:thin solid black;
+            }
+            
+        </style>
+        <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+
+            <script type="text/javascript">
+                
+                
+                $(document).ready(function(){
+                        $('#box').mousedown(function(evt){
+                            $('#box').animate({
+                                height:'50px',
+                                width :'50px'
+                                },
+                                "normal");
+                           var initClientX = evt.pageX - $(this).offset().left;
+                           var initClientY = evt.pageY - $(this).offset().top;
+
+                            $(document).on("mousemove",function(evt){
+                                x = evt.pageX - initClientX;
+                                y = evt.pageY - initClientY;
+
+                                $('.box').css({
+                                    left:x+'px', 
+                                    top:y+'px'
+                                });
+                            }); 
+                            });
+                        
+                         $(document).mouseup(function(){
+                            $(document).off("mousemove");
+                            $('#box').animate({
+                                height:'100px',
+                                width: '100px'
+                                },
+                                "normal");
+                            });
+                        });
+            </script>
+        </head>
+        <body>
+                <div id="box" class="box"></div>
+        </body>
+</html>
